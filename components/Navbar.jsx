@@ -1,16 +1,18 @@
 'use client';
 import Link from 'next/link';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import ThemeToggleButton from './ThemeToggle';
+
 
 const NavbarLink = ({ href, label }) => (
-  <Button 
-    color="inherit" 
-    component={Link} 
-    href={href} 
-    sx={{ 
-      '&:hover': { 
-        backgroundColor: 'secondary.main', 
-        color: 'white' 
+  <Button
+    color="inherit"
+    component={Link}
+    href={href}
+    sx={{
+      '&:hover': {
+        backgroundColor: 'secondary.main',
+        color: 'white'
       },
       textTransform: 'none', // Keeps the original case of the text
       fontWeight: 'bold',
@@ -34,6 +36,7 @@ const Navbar = () => (
         <NavbarLink href="/characters" label="Character Vault" />
         <NavbarLink href="/quests" label="Quests" />
         <NavbarLink href="/encounters" label="Encounters" />
+        <ThemeToggleButton />
       </Box>
     </Toolbar>
   </AppBar>
