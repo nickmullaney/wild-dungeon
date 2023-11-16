@@ -1,6 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Container } from '@mui/material'; // If using MUI
+import { Box, Container } from '@mui/material'; // If using MUI
 
 export const metadata = {
   title: 'Wild Dungeon',
@@ -9,12 +9,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Navbar />
-      <Container>
-        {children}
-      </Container>
+      <Box component="main" sx={{ flexGrow: 1, py: 3 }}>
+        <Container>{children}</Container>
+      </Box>
       <Footer />
-    </>
+    </Box>
   );
 }
