@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { useAuth } from '@/util/auth/authContext'; // Adjust the import path as needed
 
 const NavbarLink = ({ href, label }) => (
   <Button 
@@ -19,7 +20,9 @@ const NavbarLink = ({ href, label }) => (
   </Button>
 );
 
-const Navbar = ({ isLoggedIn }) => { // Assuming isLoggedIn is passed as a prop
+const Navbar = () => {
+  const { isLoggedIn, login, logout } = useAuth(); // Using the useAuth hook
+
   return (
     <AppBar position="static" color="primary">
       <Toolbar>
@@ -36,13 +39,10 @@ const Navbar = ({ isLoggedIn }) => { // Assuming isLoggedIn is passed as a prop
               <NavbarLink href="/characters" label="Character Vault" />
               <NavbarLink href="/quests" label="Quests" />
               <NavbarLink href="/encounters" label="Encounters" />
+              <Button color="inherit" onClick={logout}>Logout</Button>
             </>
           )}
-          {isLoggedIn ? (
-            <NavbarLink href="/logout" label="Logout" /> // Replace with your logout logic
-          ) : (
-            <NavbarLink href="/login" label="Login" /> // Replace with your login page link
-          )}
+          {!isLoggedIn && <Button color="inherit" onClick={login}>Login</Button>}
         </Box>
       </Toolbar>
     </AppBar>

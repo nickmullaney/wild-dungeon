@@ -1,9 +1,12 @@
-'use client'
+import React from 'react';
+import { useAuth } from '@/contexts/AuthContext'; // Adjust the import path as needed
 import Image from 'next/image';
 import styles from './page.module.css';
-import { Typography, Button, Grid, Card, CardContent } from '@mui/material'; // Assuming MUI usage
+import { Typography, Button, Grid, Card, CardContent } from '@mui/material';
 
 export default function Home() {
+  const { isLoggedIn } = useAuth();
+
   return (
     <main className={styles.main}>
       <div className={styles.hero}>
@@ -13,9 +16,15 @@ export default function Home() {
         <Typography variant="h6" gutterBottom>
           Simplify your role as a Dungeon Master.
         </Typography>
-        <Button variant="contained" color="primary" size="large">
-          Get Started
-        </Button>
+        {isLoggedIn ? (
+          <Button variant="contained" color="primary" size="large">
+            Manage Campaigns
+          </Button>
+        ) : (
+          <Button variant="contained" color="primary" size="large">
+            Get Started
+          </Button>
+        )}
       </div>
 
       <Grid container spacing={4} className={styles.features}>
@@ -39,9 +48,15 @@ export default function Home() {
         <Typography variant="h4">
           Ready to Start Your Adventure?
         </Typography>
-        <Button variant="outlined" color="secondary">
-          Join Now
-        </Button>
+        {isLoggedIn ? (
+          <Button variant="outlined" color="secondary">
+            Go to Dashboard
+          </Button>
+        ) : (
+          <Button variant="outlined" color="secondary">
+            Join Now
+          </Button>
+        )}
       </div>
     </main>
   );
